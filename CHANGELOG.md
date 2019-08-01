@@ -109,6 +109,7 @@
 - LEAD WIZARD : add missing translation.
 - DEBIT VAT DECLARATION REPORT : now the report completely filter on debit VAT.
 - Projected Stock : remove twice injection
+- REPORTED BALANCE : corrected abnormal amount in reported balance move lines if there was no partner associated to it
 
 ## [5.1.7] - 2019-06-17
 - USER : filter assigned to user in partner form
@@ -1187,4 +1188,3 @@ Moreover, the amount_remaining calculation on move line was wrong. Now we comput
 [5.1.2]: https://github.com/axelor/axelor-business-suite/compare/v5.1.1...v5.1.2
 [5.1.1]: https://github.com/axelor/axelor-business-suite/compare/v5.1.0...v5.1.1
 [5.1.0]: https://github.com/axelor/axelor-business-suite/compare/5.0...v5.1.0
-
