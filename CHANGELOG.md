@@ -21,6 +21,7 @@
 - Invoice payment: fix issue in invoice payment form when invoice due date is empty.
 - Account Config: display correct form view on clicking products.
 - Accounting Situation: fix computation of balance due debt recovery.
+- Invoice : on invoice form view corrected display of empty column in invoice payment line grid viewer.
 
 ## [5.0.11] - 2019-12-19
 ## Improvements

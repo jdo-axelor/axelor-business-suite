@@ -36,7 +36,7 @@ import com.axelor.exception.db.repo.TraceBackRepository;
 import com.axelor.exception.service.TraceBackService;
 import com.axelor.i18n.I18n;
 import com.axelor.inject.Beans;
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
@@ -59,16 +59,33 @@ public class BatchPayrollPreparationGeneration extends BatchStrategy {
 
   protected PayrollPreparationService payrollPreparationService;
 
+<<<<<<< HEAD
   @Inject PayrollPreparationRepository payrollPreparationRepository;
 
   @Inject CompanyRepository companyRepository;
 
   @Inject PeriodRepository periodRepository;
+=======
+  protected PayrollPreparationRepository payrollPreparationRepository;
+
+  protected CompanyRepository companyRepository;
+
+  protected PeriodRepository periodRepository;
+
+  protected HrBatchRepository hrBatchRepository;
+>>>>>>> 7c3630bbfb... RM#29234: Batch payroll preparation generation : corrected batch error no session. (#5712)
 
   @Inject
-  public BatchPayrollPreparationGeneration(PayrollPreparationService payrollPreparationService) {
+  public BatchPayrollPreparationGeneration(
+      PayrollPreparationService payrollPreparationService,
+      CompanyRepository companyRepository,
+      PeriodRepository periodRepository,
+      HrBatchRepository hrBatchRepository) {
     super();
     this.payrollPreparationService = payrollPreparationService;
+    this.companyRepository = companyRepository;
+    this.periodRepository = periodRepository;
+    this.hrBatchRepository = hrBatchRepository;
   }
 
   @Override
@@ -79,9 +96,16 @@ public class BatchPayrollPreparationGeneration extends BatchStrategy {
     duplicateAnomaly = 0;
     configurationAnomaly = 0;
     total = 0;
+<<<<<<< HEAD
     hrBatch = Beans.get(HrBatchRepository.class).find(batch.getHrBatch().getId());
     company = Beans.get(CompanyRepository.class).find(hrBatch.getCompany().getId());
 
+=======
+    hrBatch = hrBatchRepository.find(batch.getHrBatch().getId());
+    if (hrBatch.getCompany() != null) {
+      company = companyRepository.find(hrBatch.getCompany().getId());
+    }
+>>>>>>> 7c3630bbfb... RM#29234: Batch payroll preparation generation : corrected batch error no session. (#5712)
     checkPoint();
   }
 
@@ -146,7 +170,20 @@ public class BatchPayrollPreparationGeneration extends BatchStrategy {
 
     for (Employee employee : employeeList) {
       try {
+<<<<<<< HEAD
         createPayrollPreparation(employeeRepository.find(employee.getId()));
+=======
+        employee = employeeRepository.find(employee.getId());
+        hrBatch = hrBatchRepository.find(batch.getHrBatch().getId());
+        if (hrBatch.getCompany() != null) {
+          company = companyRepository.find(hrBatch.getCompany().getId());
+        }
+        if (employee.getMainEmploymentContract() != null
+            && employee.getMainEmploymentContract().getStatus()
+                != EmploymentContractRepository.STATUS_CLOSED) {
+          createPayrollPreparation(employee);
+        }
+>>>>>>> 7c3630bbfb... RM#29234: Batch payroll preparation generation : corrected batch error no session. (#5712)
       } catch (AxelorException e) {
         TraceBackService.trace(e, IException.LEAVE_MANAGEMENT, batch.getId());
         incrementAnomaly();
