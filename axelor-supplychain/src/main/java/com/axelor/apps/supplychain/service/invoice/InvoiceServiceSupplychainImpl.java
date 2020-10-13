@@ -152,9 +152,7 @@ public class InvoiceServiceSupplychainImpl extends InvoiceServiceImpl
     SaleOrder saleOrder = invoice.getSaleOrder();
     // search sale order in invoice lines
     List<SaleOrder> saleOrderList =
-        invoice
-            .getInvoiceLineList()
-            .stream()
+        invoice.getInvoiceLineList().stream()
             .map(invoiceLine -> invoice.getSaleOrder())
             .collect(Collectors.toList());
 
@@ -168,8 +166,7 @@ public class InvoiceServiceSupplychainImpl extends InvoiceServiceImpl
       return new ArrayList<>();
     } else {
       // get move lines from sale order
-      return saleOrderList
-          .stream()
+      return saleOrderList.stream()
           .flatMap(saleOrder1 -> saleOrder1.getAdvancePaymentList().stream())
           .filter(Objects::nonNull)
           .distinct()
@@ -216,9 +213,7 @@ public class InvoiceServiceSupplychainImpl extends InvoiceServiceImpl
           && packLine.getSubLineList() != null) {
         packLine.getSubLineList().removeIf(it -> it.getId() != null && !invoiceLines.contains(it));
         packLine.setTotalPack(
-            packLine
-                .getSubLineList()
-                .stream()
+            packLine.getSubLineList().stream()
                 .map(it -> it.getExTaxTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         subLines.addAll(packLine.getSubLineList());

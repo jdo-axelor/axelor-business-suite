@@ -321,9 +321,9 @@ public class InvoiceController {
             (List)
                 (((List) context.get("_ids"))
                     .stream()
-                    .filter(ObjectUtils::notEmpty)
-                    .map(input -> Long.parseLong(input.toString()))
-                    .collect(Collectors.toList()));
+                        .filter(ObjectUtils::notEmpty)
+                        .map(input -> Long.parseLong(input.toString()))
+                        .collect(Collectors.toList()));
         fileLink = Beans.get(InvoicePrintService.class).printInvoices(ids);
         title = I18n.get("Invoices");
       } else if (context.get("id") != null) {
@@ -858,9 +858,9 @@ public class InvoiceController {
             (List)
                 (((List) context.get("_ids"))
                     .stream()
-                    .filter(ObjectUtils::notEmpty)
-                    .map(input -> Long.parseLong(input.toString()))
-                    .collect(Collectors.toList()));
+                        .filter(ObjectUtils::notEmpty)
+                        .map(input -> Long.parseLong(input.toString()))
+                        .collect(Collectors.toList()));
 
         List<Long> invoiceToPay =
             Beans.get(InvoicePaymentCreateService.class).getInvoiceIdsToPay(invoiceIdList);

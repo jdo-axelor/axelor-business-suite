@@ -35,8 +35,7 @@ public class ImportConfiguratorCreator {
   public Object importConfiguratorCreator(Object bean, Map values)
       throws AxelorException, IOException {
     URL url =
-        MetaScanner.findAll("production_configuratorCreator.xml")
-            .stream()
+        MetaScanner.findAll("production_configuratorCreator.xml").stream()
             .findAny()
             .orElseThrow(
                 () ->

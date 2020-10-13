@@ -148,8 +148,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     }
     stockHistoryLine.setSumIncQtyPeriod(sumIncQtyPeriod);
     stockHistoryLine.setPriceIncStockMovePeriod(
-        stockMoveLineList
-            .stream()
+        stockMoveLineList.stream()
             .map(StockMoveLine::getCompanyUnitPriceUntaxed)
             .reduce(BigDecimal::add)
             .orElse(BigDecimal.ZERO));
@@ -176,8 +175,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     }
     stockHistoryLine.setSumOutQtyPeriod(sumOutQtyPeriod);
     stockHistoryLine.setPriceOutStockMovePeriod(
-        stockMoveLineList
-            .stream()
+        stockMoveLineList.stream()
             .map(StockMoveLine::getCompanyUnitPriceUntaxed)
             .reduce(BigDecimal::add)
             .orElse(BigDecimal.ZERO));
@@ -195,8 +193,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setLabel(I18n.get("Total"));
 
     Integer countIncMvtStock =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getCountIncMvtStockPeriod)
             .filter(Objects::nonNull)
             .mapToInt(Integer::intValue)
@@ -204,8 +201,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setCountIncMvtStockPeriod(countIncMvtStock);
 
     BigDecimal sumIncQtyPeriod =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getSumIncQtyPeriod)
             .filter(Objects::nonNull)
             .reduce(BigDecimal::add)
@@ -213,8 +209,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setSumIncQtyPeriod(sumIncQtyPeriod);
 
     BigDecimal priceIncStockMove =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getPriceIncStockMovePeriod)
             .filter(Objects::nonNull)
             .reduce(BigDecimal::add)
@@ -222,8 +217,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setPriceIncStockMovePeriod(priceIncStockMove);
 
     Integer countOutMvtStock =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getCountOutMvtStockPeriod)
             .filter(Objects::nonNull)
             .mapToInt(Integer::intValue)
@@ -231,8 +225,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setCountOutMvtStockPeriod(countOutMvtStock);
 
     BigDecimal sumOutQtyPeriod =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getSumOutQtyPeriod)
             .filter(Objects::nonNull)
             .reduce(BigDecimal::add)
@@ -240,8 +233,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
     stockHistoryLine.setSumOutQtyPeriod(sumOutQtyPeriod);
 
     BigDecimal priceOutStockMove =
-        stockHistoryLineList
-            .stream()
+        stockHistoryLineList.stream()
             .map(StockHistoryLine::getPriceOutStockMovePeriod)
             .filter(Objects::nonNull)
             .reduce(BigDecimal::add)

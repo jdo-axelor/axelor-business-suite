@@ -118,9 +118,7 @@ public class SaleOrderStockServiceImpl implements SaleOrderStockService {
         getAllSaleOrderLinePerDate(saleOrder);
 
     for (LocalDate estimatedDeliveryDate :
-        saleOrderLinePerDateMap
-            .keySet()
-            .stream()
+        saleOrderLinePerDateMap.keySet().stream()
             .filter(x -> x != null)
             .sorted((x, y) -> x.compareTo(y))
             .collect(Collectors.toList())) {
@@ -166,9 +164,7 @@ public class SaleOrderStockServiceImpl implements SaleOrderStockService {
       return Optional.empty();
     }
 
-    if (stockMove
-        .getStockMoveLineList()
-        .stream()
+    if (stockMove.getStockMoveLineList().stream()
         .noneMatch(
             stockMoveLine ->
                 stockMoveLine.getSaleOrderLine() != null

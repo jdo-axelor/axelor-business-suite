@@ -234,13 +234,11 @@ public class StockMoveInvoiceServiceImpl implements StockMoveInvoiceService {
         supplyChainConfigService.getSupplyChainConfig(stockMove.getCompany());
     if (stockMoveLineList != null && supplyChainConfig.getActivateOutStockMovePartialInvoicing()) {
       for (SaleOrderLine saleOrderLine :
-          stockMoveLineList
-              .stream()
+          stockMoveLineList.stream()
               .map(StockMoveLine::getSaleOrderLine)
               .filter(Objects::nonNull)
               .collect(Collectors.toList())) {
-        if (stockMoveLineList
-                .stream()
+        if (stockMoveLineList.stream()
                 .filter(stockMoveLine -> saleOrderLine.equals(stockMoveLine.getSaleOrderLine()))
                 .count()
             > 1) {
@@ -692,16 +690,12 @@ public class StockMoveInvoiceServiceImpl implements StockMoveInvoiceService {
         && stockMove.getInvoiceSet() != null
         && !stockMove.getInvoiceSet().isEmpty()) {
       BigDecimal totalInvoicedQty =
-          stockMove
-              .getStockMoveLineList()
-              .stream()
+          stockMove.getStockMoveLineList().stream()
               .map(StockMoveLine::getQtyInvoiced)
               .reduce(BigDecimal::add)
               .orElse(BigDecimal.ZERO);
       BigDecimal totalRealQty =
-          stockMove
-              .getStockMoveLineList()
-              .stream()
+          stockMove.getStockMoveLineList().stream()
               .map(StockMoveLine::getRealQty)
               .reduce(BigDecimal::add)
               .orElse(BigDecimal.ZERO);

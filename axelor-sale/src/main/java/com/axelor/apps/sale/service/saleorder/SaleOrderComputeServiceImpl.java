@@ -221,9 +221,7 @@ public class SaleOrderComputeServiceImpl implements SaleOrderComputeService {
       if (packLine.getTypeSelect() == 2 && packLine.getSubLineList() != null) {
         packLine.getSubLineList().removeIf(it -> it.getId() != null && !soLines.contains(it));
         packLine.setTotalPack(
-            packLine
-                .getSubLineList()
-                .stream()
+            packLine.getSubLineList().stream()
                 .map(it -> it.getExTaxTotal())
                 .reduce(BigDecimal.ZERO, BigDecimal::add));
         subLines.addAll(packLine.getSubLineList());
